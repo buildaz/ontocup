@@ -1,127 +1,127 @@
 # OntoCup
 
-Ontologia OWL para o domínio da Copa do Mundo de Futebol (FIFA World Cup), desenvolvida para fins experimentais.
+OWL ontology for the FIFA World Cup domain, developed for experimental purposes.
 
 **IRI:** `http://www.buildaz.io/ontocup/`
 
-**Autoria:** Lívia Nascimento  
-**Contribuições:** Rafaela Moos, João Couto
+**Author:** Lívia Nascimento  
+**Contributors:** Rafaela Moos, João Couto
 
 ---
 
-## Visão Geral
+## Overview
 
-O OntoCup representa formalmente entidades, eventos e relações do universo da Copa do Mundo: competições, seleções nacionais, partidas, jogadores, árbitros, locais e eventos de jogo.
+OntoCup formally represents entities, events, and relations in the FIFA World Cup universe: competitions, national teams, matches, players, referees, locations, and game events.
 
-O modelo é fundamentado na **Basic Formal Ontology (BFO 2020)** e no **Information Artifact Ontology (IAO)**, garantindo consistência lógica e alinhamento com padrões ontológicos estabelecidos. Todos os termos são anotados em português e inglês.
+The model is grounded in **Basic Formal Ontology (BFO 2020)** and the **Information Artifact Ontology (IAO)**, ensuring logical consistency and alignment with established ontological standards. All terms are annotated in both Portuguese and English.
 
 ---
 
-## Arquivos
+## Files
 
-| Arquivo | Descrição |
+| File | Description |
 |---|---|
-| `ontocup.ttl` | Versão principal — importa BFO e IAO via `owl:imports` |
-| `ontocup-standalone.ttl` | Versão standalone — BFO e IAO embutidos inline, sem dependências externas |
+| `ontocup.ttl` | Main version — imports BFO and IAO via `owl:imports` |
+| `ontocup-standalone.ttl` | Standalone version — BFO and IAO inlined, no external dependencies |
 
-Use `ontocup-standalone.ttl` quando o ambiente não tiver acesso à internet ou quando quiser evitar a resolução de imports externos (ex.: Protégé offline, Ontop).
-
----
-
-## Estrutura da Ontologia
-
-### Agentes e Papéis (Roles — BFO:0000023)
-
-| Classe | Label EN | Descrição |
-|---|---|---|
-| `jogador` | Player | Papel assumido por uma pessoa convocada para um time |
-| `técnico` | Coach | Responsável pela direção técnica e tática do time |
-| `árbitro` | Referee | Designado para fiscalizar as regras durante uma partida |
-| `goleiro` | Goalkeeper | Jogador que defende a baliza |
-| `atacante` | Forward | Jogador que cria e converte oportunidades de gol |
-| `meia` | Midfielder | Faz a ligação entre defesa e ataque |
-| `zagueiro` | Centre back | Protege a área defensiva |
-
-### Organizações e Times (Object Aggregate — BFO:0000027)
-
-| Classe | Label EN | Descrição |
-|---|---|---|
-| `organização` | Organization | Classe geral para entidades institucionais do futebol |
-| `clube` | Club | Estrutura jurídica com vínculo formal a federações |
-| `seleção_nacional` | National selection | Entidade institucional que representa um país |
-| `time` | Team | Agregado de pessoas no papel de jogador |
-| `seleção_-_time` | National team | Time cujos membros compartilham a mesma nacionalidade |
-
-### Localizações (Site — BFO:0000029)
-
-| Classe | Label EN | Descrição |
-|---|---|---|
-| `continente` | Continent | Grande divisão territorial da superfície terrestre |
-| `país` | Country | Nação soberana, localizada em um continente |
-| `estado` | State | Divisão territorial de um país |
-| `cidade` | City | Unidade territorial urbana, localizada em um estado |
-| `estádio` | Stadium | Estrutura física onde as partidas são realizadas |
-| `país_sede` | Host country | Papel assumido por um país que sedia a Copa |
-| `cidade_sede` | Host city | Papel assumido por uma cidade que hospeda partidas |
-
-### Processos (Process — BFO:0000015)
-
-| Classe | Label EN | Descrição |
-|---|---|---|
-| `partida` | Match | Dois times se enfrentam em um estádio em data determinada |
-| `marcar_gol` | Score a goal | Jogador introduz a bola na baliza adversária |
-| `marcar_cartão` | Issue card | Árbitro aplica penalidade disciplinar |
-| `marcar_falta` | Commit foul | Jogador comete infração às regras |
-| `fazer_substituição` | Make substitution | Um jogador é trocado por um reserva |
-
-### Entidades Informacionais (Data Item — IAO:0000027)
-
-| Classe | Label EN | Descrição |
-|---|---|---|
-| `gol` | Goal | Registro da ocorrência de um gol em uma partida |
-| `cartão` | Card | Registro da aplicação de penalidade disciplinar |
-| `falta` | Foul | Registro de infração às regras do jogo |
-| `substituição` | Substitution | Registro da troca de jogadores |
-| `placar` | Score | Contagem de gols de cada time na partida |
-| `resultado` | Result | Desfecho final de uma partida |
-| `temporada` | Season | Edição específica da Copa do Mundo |
-
-### Outras Classes
-
-| Classe | Label EN | Descrição |
-|---|---|---|
-| `pessoa` | Person | Entidade que persiste no tempo; pode assumir papéis |
-| `nacionalidade` | Nationality | Qualidade que determina elegibilidade para representar uma seleção |
+Use `ontocup-standalone.ttl` when the environment has no internet access or when you want to avoid resolving external imports (e.g., offline Protégé, Ontop).
 
 ---
 
-## Propriedades de Objeto (Object Properties)
+## Ontology Structure
 
-| Propriedade | Label EN | Domínio → Range |
+### Agents and Roles (BFO:0000023)
+
+| Class | Label | Description |
 |---|---|---|
-| `acontece_em` | occurs in | Processo esportivo → Estádio |
-| `assistido_por` | assisted by | Gol → Jogador |
-| `dirige` | manages | Técnico → Time |
-| `empatante` | drawing team | Resultado → Seleção-time |
-| `has_member_part` | has member part | Time/Seleção → Pessoa |
-| `marcado_por` | marked by | Gol/Falta/Cartão → Agente |
-| `participante` | participant | Placar/Resultado → Seleção-time |
-| `perdedor` | loser | Resultado → Seleção-time |
-| `recebido_por` | received by | Cartão → Jogador |
-| `registrado_em` | registered in | Entidade informacional → Partida |
-| `sediado` | hosted in | Temporada → País |
-| `selecao_mandante` | home team | Placar/Resultado → Seleção-time |
-| `selecao_visitante` | away team | Placar/Resultado → Seleção-time |
-| `sofrido_por` | suffered by | Falta → Jogador |
-| `tem_nacionalidade` | has nationality | Pessoa → Nacionalidade |
-| `tem_posição` | has position | Jogador → Papel de posição |
-| `vencedor` | winner | Resultado → Seleção-time |
+| `jogador` | Player | Role assumed by a person called up to a team |
+| `técnico` | Coach | Responsible for the technical and tactical management of the team |
+| `árbitro` | Referee | Designated to oversee rule compliance during a match |
+| `goleiro` | Goalkeeper | Player who defends the goal |
+| `atacante` | Forward | Player who creates and converts goal-scoring opportunities |
+| `meia` | Midfielder | Links defense and attack |
+| `zagueiro` | Centre back | Protects the defensive area |
+
+### Organizations and Teams (Object Aggregate — BFO:0000027)
+
+| Class | Label | Description |
+|---|---|---|
+| `organização` | Organization | General class for institutional entities in football |
+| `clube` | Club | Legal structure with formal ties to federations |
+| `seleção_nacional` | National selection | Institutional entity representing a country |
+| `time` | Team | Aggregate of persons in the role of players |
+| `seleção_-_time` | National team | Team whose members share the same nationality |
+
+### Locations (Site — BFO:0000029)
+
+| Class | Label | Description |
+|---|---|---|
+| `continente` | Continent | Major territorial division of the Earth's surface |
+| `país` | Country | Sovereign nation, located within a continent |
+| `estado` | State | Territorial division of a country |
+| `cidade` | City | Urban territorial unit, located within a state |
+| `estádio` | Stadium | Physical structure where matches are held |
+| `país_sede` | Host country | Role assumed by a country hosting the World Cup |
+| `cidade_sede` | Host city | Role assumed by a city hosting official matches |
+
+### Processes (BFO:0000015)
+
+| Class | Label | Description |
+|---|---|---|
+| `partida` | Match | Two teams compete against each other in a stadium on a given date |
+| `marcar_gol` | Score a goal | Player drives the ball into the opposing goal |
+| `marcar_cartão` | Issue card | Referee applies a disciplinary penalty |
+| `marcar_falta` | Commit foul | Player commits an infraction of the rules |
+| `fazer_substituição` | Make substitution | A player is replaced by a substitute |
+
+### Information Entities (Data Item — IAO:0000027)
+
+| Class | Label | Description |
+|---|---|---|
+| `gol` | Goal | Record of a goal occurrence in a match |
+| `cartão` | Card | Record of a disciplinary penalty applied |
+| `falta` | Foul | Record of a rule infraction |
+| `substituição` | Substitution | Record of a player exchange |
+| `placar` | Score | Goal count for each team in a match |
+| `resultado` | Result | Final outcome of a match |
+| `temporada` | Season | A specific edition of the World Cup |
+
+### Other Classes
+
+| Class | Label | Description |
+|---|---|---|
+| `pessoa` | Person | Entity that endures through time; can assume roles |
+| `nacionalidade` | Nationality | Quality that determines eligibility to represent a national team |
 
 ---
 
-## Regras SWRL
+## Object Properties
 
-**S5** — Valida que todos os membros de uma `seleção_-_time` compartilham a mesma nacionalidade que a seleção a qual representam:
+| Property | Label | Domain → Range |
+|---|---|---|
+| `acontece_em` | occurs in | Sporting process → Stadium |
+| `assistido_por` | assisted by | Goal → Player |
+| `dirige` | manages | Coach → Team |
+| `empatante` | drawing team | Result → National team |
+| `has_member_part` | has member part | Team/Selection → Person |
+| `marcado_por` | marked by | Goal/Foul/Card → Agent |
+| `participante` | participant | Score/Result → National team |
+| `perdedor` | loser | Result → National team |
+| `recebido_por` | received by | Card → Player |
+| `registrado_em` | registered in | Information entity → Match |
+| `sediado` | hosted in | Season → Country |
+| `selecao_mandante` | home team | Score/Result → National team |
+| `selecao_visitante` | away team | Score/Result → National team |
+| `sofrido_por` | suffered by | Foul → Player |
+| `tem_nacionalidade` | has nationality | Person → Nationality |
+| `tem_posição` | has position | Player → Positional role |
+| `vencedor` | winner | Result → National team |
+
+---
+
+## SWRL Rules
+
+**S5** — Validates that all members of a `seleção_-_time` share the same nationality as the team they represent:
 
 ```
 seleção_-_time(?s) ∧ has_member_part(?s, ?p) ∧ pessoa(?p) ∧ tem_nacionalidade(?s, ?n)
@@ -130,16 +130,16 @@ seleção_-_time(?s) ∧ has_member_part(?s, ?p) ∧ pessoa(?p) ∧ tem_nacional
 
 ---
 
-## Como usar
+## Usage
 
-### Carregar no Protégé
+### Loading in Protégé
 
-1. Abra o Protégé
-2. `File → Open` → selecione `ontocup.ttl` (requer internet para resolver imports) **ou** `ontocup-v2-standalone.ttl` (sem dependências externas)
+1. Open Protégé
+2. `File → Open` → select `ontocup.ttl` (requires internet to resolve imports) **or** `ontocup-standalone.ttl` (no external dependencies)
 
-### Usar com Ontop (SPARQL over relational DB)
+### Using with Ontop (SPARQL over relational DB)
 
-Recomenda-se `ontocup-v2-standalone.ttl` para evitar problemas de resolução de imports em ambientes Ontop. Configure o arquivo como a ontologia base no mapping do Ontop.
+Use `ontocup-standalone.ttl` to avoid import resolution issues in Ontop environments. Set it as the base ontology in your Ontop mapping configuration.
 
 ---
 
@@ -154,4 +154,4 @@ Recomenda-se `ontocup-v2-standalone.ttl` para evitar problemas de resolução de
 
 ---
 
-Desenvolvido por [Buildaz](https://www.buildaz.io).
+Developed by [Buildaz](https://www.buildaz.io).
