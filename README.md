@@ -1,6 +1,6 @@
 # OntoCup
 
-Ontologia OWL para o domínio da Copa do Mundo de Futebol (FIFA World Cup), desenvolvida para fins experimentais e de apoio a ações de marketing.
+Ontologia OWL para o domínio da Copa do Mundo de Futebol (FIFA World Cup), desenvolvida para fins experimentais.
 
 **IRI:** `http://www.buildaz.io/ontocup/`
 
@@ -11,7 +11,7 @@ Ontologia OWL para o domínio da Copa do Mundo de Futebol (FIFA World Cup), dese
 
 ## Visão Geral
 
-O OntoCup representa formalmente entidades, eventos e relações do universo da Copa do Mundo: competições, seleções nacionais, partidas, jogadores, árbitros, localizações e eventos de jogo.
+O OntoCup representa formalmente entidades, eventos e relações do universo da Copa do Mundo: competições, seleções nacionais, partidas, jogadores, árbitros, locais e eventos de jogo.
 
 O modelo é fundamentado na **Basic Formal Ontology (BFO 2020)** e no **Information Artifact Ontology (IAO)**, garantindo consistência lógica e alinhamento com padrões ontológicos estabelecidos. Todos os termos são anotados em português e inglês.
 
@@ -22,9 +22,9 @@ O modelo é fundamentado na **Basic Formal Ontology (BFO 2020)** e no **Informat
 | Arquivo | Descrição |
 |---|---|
 | `ontocup.ttl` | Versão principal — importa BFO e IAO via `owl:imports` |
-| `ontocup-v2-standalone.ttl` | Versão standalone — BFO e IAO embutidos inline, sem dependências externas |
+| `ontocup-standalone.ttl` | Versão standalone — BFO e IAO embutidos inline, sem dependências externas |
 
-Use `ontocup-v2-standalone.ttl` quando o ambiente não tiver acesso à internet ou quando quiser evitar a resolução de imports externos (ex.: Protégé offline, Ontop).
+Use `ontocup-standalone.ttl` quando o ambiente não tiver acesso à internet ou quando quiser evitar a resolução de imports externos (ex.: Protégé offline, Ontop).
 
 ---
 
@@ -121,7 +121,7 @@ Use `ontocup-v2-standalone.ttl` quando o ambiente não tiver acesso à internet 
 
 ## Regras SWRL
 
-**S5** — Valida que todos os membros de uma `seleção_-_time` compartilham a mesma nacionalidade que a seleção:
+**S5** — Valida que todos os membros de uma `seleção_-_time` compartilham a mesma nacionalidade que a seleção a qual representam:
 
 ```
 seleção_-_time(?s) ∧ has_member_part(?s, ?p) ∧ pessoa(?p) ∧ tem_nacionalidade(?s, ?n)
@@ -154,6 +154,4 @@ Recomenda-se `ontocup-v2-standalone.ttl` para evitar problemas de resolução de
 
 ---
 
-## Licença
-
-Desenvolvido por [Buildaz](https://www.buildaz.io). Para uso interno e experimental.
+Desenvolvido por [Buildaz](https://www.buildaz.io).
