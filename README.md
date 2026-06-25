@@ -1,5 +1,7 @@
 # OntoCup
 
+> [Leia em Português](README.pt-br.md)
+
 OWL ontology for the FIFA World Cup domain, developed for experimental purposes.
 
 **IRI:** `http://www.buildaz.io/ontocup/`
