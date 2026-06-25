@@ -1,0 +1,1051 @@
+@prefix : <http://www.buildaz.io/ontocup/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix obda: <https://w3id.org/obda/vocabulary#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.buildaz.io/ontocup/> .
+
+<http://www.buildaz.io/ontocup> rdf:type owl:Ontology ;
+                                 <http://purl.org/dc/elements/1.1/contributor> "Rafaela Moos" ;
+                                 <http://purl.org/dc/elements/1.1/creator> "Lívia Nascimento" ;
+                                 <http://purl.org/dc/terms/contributor> "João Couto" ;
+                                 <http://purl.org/dc/terms/description> "Esta ontologia representa formalmente o domínio da Copa do Mundo de Futebol, desenvolvida para fins experimentais e de apoio a ações de marketing. O modelo é fundamentado na Basic Formal Ontology (BFO 2020) e organiza entidades como competições, seleções nacionais, partidas, agentes, localizações e eventos de jogo em uma hierarquia ontológica coerente. Conceitos como Jogador, Técnico e Árbitro são modelados como papéis (Role) assumidos por pessoas (Object), enquanto SeleçãoNacional é tratada como subclasse de Equipe (Object Aggregate) com vínculo obrigatório a um País. Eventos como partidas e gols são representados como processos (Process), e locais como estádios são distinguidos entre entidade material (Object) e espaço funcional (Site)."@pt-br ,
+                                                                        "This ontology formally represents the FIFA World Cup domain, developed for experimental purposes and marketing support. The model is grounded in Basic Formal Ontology (BFO 2020) and organizes entities such as competitions, national teams, matches, agents, locations, and game events into a coherent ontological hierarchy. Concepts such as Player, Coach, and Referee are modeled as roles (Role) assumed by persons (Object), while NationalTeam is treated as a subclass of Team (Object Aggregate) with a mandatory link to a Country. Events such as matches and goals are represented as processes (Process), and locations such as stadiums are distinguished between material entity (Object) and functional space (Site)."@en ;
+                                 <http://purl.org/dc/terms/title> "Ontocup" .
+
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/terms/description
+<http://purl.org/dc/terms/description> rdf:type owl:AnnotationProperty .
+
+###  http://purl.org/dc/terms/title
+<http://purl.org/dc/terms/title> rdf:type owl:AnnotationProperty .
+
+###  http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled
+<http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> rdf:type owl:AnnotationProperty .
+
+###  http://www.w3.org/2004/02/skos/core#definition
+<http://www.w3.org/2004/02/skos/core#definition> rdf:type owl:AnnotationProperty .
+
+###  http://purl.obolibrary.org/obo/IAO_0000118
+<http://purl.obolibrary.org/obo/IAO_0000118> rdf:type owl:AnnotationProperty ;
+    rdfs:label "alternative term"@en .
+
+
+#################################################################
+#    BFO Classes (inline — substitui owl:imports)
+#################################################################
+
+###  BFO:0000015 - process
+<http://purl.obolibrary.org/obo/BFO_0000015> rdf:type owl:Class ;
+    rdfs:label "process"@en ,
+               "processo"@pt .
+
+###  BFO:0000019 - quality
+<http://purl.obolibrary.org/obo/BFO_0000019> rdf:type owl:Class ;
+    rdfs:label "quality"@en ,
+               "qualidade"@pt .
+
+###  BFO:0000023 - role
+<http://purl.obolibrary.org/obo/BFO_0000023> rdf:type owl:Class ;
+    rdfs:label "role"@en ,
+               "papel"@pt .
+
+###  BFO:0000027 - object aggregate
+<http://purl.obolibrary.org/obo/BFO_0000027> rdf:type owl:Class ;
+    rdfs:label "object aggregate"@en ,
+               "agregado de objetos"@pt .
+
+###  BFO:0000030 - object
+<http://purl.obolibrary.org/obo/BFO_0000030> rdf:type owl:Class ;
+    rdfs:label "object"@en ,
+               "objeto"@pt .
+
+
+#################################################################
+#    IAO Classes (inline — substitui owl:imports)
+#################################################################
+
+###  IAO:0000027 - data item
+<http://purl.obolibrary.org/obo/IAO_0000027> rdf:type owl:Class ;
+    rdfs:label "data item"@en ,
+               "item de dados"@pt .
+
+
+#################################################################
+#    BFO Object Properties (inline — substitui owl:imports)
+#################################################################
+
+###  BFO:0000050 - part of
+<http://purl.obolibrary.org/obo/BFO_0000050> rdf:type owl:ObjectProperty ;
+    rdfs:label "part of"@en .
+
+###  BFO:0000051 - has part
+<http://purl.obolibrary.org/obo/BFO_0000051> rdf:type owl:ObjectProperty ;
+    rdfs:label "has part"@en .
+
+###  BFO:0000057 - has participant
+<http://purl.obolibrary.org/obo/BFO_0000057> rdf:type owl:ObjectProperty ;
+    rdfs:label "has participant"@en .
+
+###  BFO:0000066 - occurs in
+<http://purl.obolibrary.org/obo/BFO_0000066> rdf:type owl:ObjectProperty ;
+    rdfs:label "occurs in"@en .
+
+###  BFO:0000115 - has member part
+<http://purl.obolibrary.org/obo/BFO_0000115> rdf:type owl:ObjectProperty ;
+    rdfs:label "has member part"@en .
+
+###  BFO:0000129 - member part of
+<http://purl.obolibrary.org/obo/BFO_0000129> rdf:type owl:ObjectProperty ;
+    rdfs:label "member part of"@en .
+
+###  BFO:0000171 - located in
+<http://purl.obolibrary.org/obo/BFO_0000171> rdf:type owl:ObjectProperty ;
+    rdfs:label "located in"@en .
+
+###  BFO:0000196 - quality of
+<http://purl.obolibrary.org/obo/BFO_0000196> rdf:type owl:ObjectProperty ;
+    rdfs:label "quality of"@en .
+
+###  BFO:0000197 - bearer of
+<http://purl.obolibrary.org/obo/BFO_0000197> rdf:type owl:ObjectProperty ;
+    rdfs:label "bearer of"@en .
+
+
+#################################################################
+#    IAO / RO Object Properties (inline — substitui owl:imports)
+#################################################################
+
+###  IAO:0000136 - is about
+<http://purl.obolibrary.org/obo/IAO_0000136> rdf:type owl:ObjectProperty ;
+    rdfs:label "is about"@en .
+
+###  RO:0000053 - has role
+<http://purl.obolibrary.org/obo/RO_0000053> rdf:type owl:ObjectProperty ;
+    rdfs:label "has role"@en .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.buildaz.io/ontocup/acontece_em
+:acontece_em rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000066> ;
+             rdfs:label "acontece em"@pt ,
+                        "occurs in"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a sporting process to the physical location where it occurs."@en ,
+                                                              "Relação que associa um processo esportivo ao local físico onde ele ocorre."@pt .
+
+
+###  http://www.buildaz.io/ontocup/assistido_por
+:assistido_por rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+               rdfs:label "assisted by"@en ,
+                          "assistido por"@pt ;
+               <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a goal to the player who made the pass or direct assist that led to the goal being scored."@en ,
+                                                                "Relação que associa um gol ao jogador que realizou o passe ou assistência direta para que o gol fosse marcado."@pt .
+
+
+###  http://www.buildaz.io/ontocup/dirige
+:dirige rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf owl:topObjectProperty ;
+        rdfs:label "dirige"@pt ,
+                   "manages"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a coach to the team for which they are responsible for tactical and technical management during the competition."@en ,
+                                                         "Relação que associa um técnico ao time pelo qual é responsável pela direção tática e técnica durante a competição."@pt .
+
+
+###  http://www.buildaz.io/ontocup/empatante
+:empatante rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+           rdfs:label "drawing team"@en ,
+                      "empatante"@pt ;
+           <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a result to one of the two teams that finished the match with an equal score."@en ,
+                                                            "Relação que associa um resultado a um dos dois times que encerraram a partida com placar igual."@pt .
+
+
+###  http://www.buildaz.io/ontocup/has_member_part
+:has_member_part rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000115> ;
+                 rdfs:label "has member part"@en ,
+                            "tem como membro"@pt ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates an aggregate (such as a team or national selection) to the persons who compose it as members."@en ,
+                                                                  "Relação que associa um agregado (como um time ou seleção) às pessoas que o compõem como membros."@pt .
+
+
+###  http://www.buildaz.io/ontocup/marcado_por
+:marcado_por rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+             rdfs:label "marcado por"@pt ,
+                        "marked by"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a game event (goal, foul, or card) to the agent responsible for its occurrence."@en ,
+                                                              "Relação que associa um evento de jogo (gol, falta ou cartão) ao agente responsável por sua ocorrência."@pt .
+
+
+###  http://www.buildaz.io/ontocup/participante
+:participante rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+              rdfs:label "participant"@en ,
+                         "participante"@pt ;
+              <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a score or result to one of the teams that took part in the match."@en ,
+                                                               "Relação que associa um placar ou resultado a um dos times que participou da partida."@pt .
+
+
+###  http://www.buildaz.io/ontocup/perdedor
+:perdedor rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+          rdfs:label "loser"@en ,
+                     "perdedor"@pt ;
+          <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a result to the team that scored fewer goals and therefore lost the match."@en ,
+                                                           "Relação que associa um resultado ao time que marcou menos gols e, portanto, perdeu a partida."@pt .
+
+
+###  http://www.buildaz.io/ontocup/posição_de
+:posição_de rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf <http://purl.obolibrary.org/obo/BFO_0000196> ;
+            rdfs:label "position of"@en ,
+                       "posição de"@pt ;
+            <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a functional positional role to the player who performs it on the field."@en ,
+                                                             "Relação que associa um papel funcional de posição ao jogador que o desempenha em campo."@pt .
+
+
+###  http://www.buildaz.io/ontocup/recebido_por
+:recebido_por rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+              rdfs:label "recebido por"@pt ,
+                         "received by"@en ;
+              <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a disciplinary penalty (card) to the player who received it during the match."@en ,
+                                                               "Relação que associa uma penalidade disciplinar (cartão) ao jogador que a recebeu durante a partida."@pt .
+
+
+###  http://www.buildaz.io/ontocup/registrado_em
+:registrado_em rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:label "registered in"@en ,
+                          "registrado em"@pt ;
+               <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates an informational entity (such as score or result) to the match in which it was generated."@en ,
+                                                                "Relação que associa uma entidade informacional (como placar ou resultado) à partida em que foi gerada."@pt .
+
+
+###  http://www.buildaz.io/ontocup/sediado
+:sediado rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+         rdfs:label "hosted in"@en ,
+                    "sediado"@pt ;
+         <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a World Cup season to the country in which it was hosted."@en ,
+                                                          "Relação que associa uma temporada da Copa do Mundo ao país em que foi sediada."@pt .
+
+
+###  http://www.buildaz.io/ontocup/selecao_mandante
+:selecao_mandante rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf :participante ;
+                  rdfs:label "home team"@en ,
+                             "seleção mandante"@pt ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a score or result to the team designated as the home side in the match."@en ,
+                                                                   "Relação que associa um placar ou resultado ao time designado como mandante na partida."@pt .
+
+
+###  http://www.buildaz.io/ontocup/selecao_visitante
+:selecao_visitante rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :participante ;
+                   rdfs:label "away team"@en ,
+                              "seleção visitante"@pt ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a score or result to the team designated as the away side in the match."@en ,
+                                                                    "Relação que associa um placar ou resultado ao time designado como visitante na partida."@pt .
+
+
+###  http://www.buildaz.io/ontocup/sofrido_por
+:sofrido_por rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+             rdfs:label "sofrido por"@pt ,
+                        "suffered by"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a foul to the player who was the victim of the infraction committed."@en ,
+                                                              "Relação que associa uma falta ao jogador que foi vítima da infração cometida."@pt .
+
+
+###  http://www.buildaz.io/ontocup/tem_nacionalidade
+:tem_nacionalidade rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf <http://purl.obolibrary.org/obo/RO_0000053> ;
+                   rdfs:label "has nationality"@en ,
+                              "tem nacionalidade"@pt ;
+                   <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a person to their nationality, determining the country they represent in official competitions."@en ,
+                                                                    "Relação que associa uma pessoa à sua nacionalidade, determinando o país que representa em competições oficiais."@pt .
+
+
+###  http://www.buildaz.io/ontocup/tem_posição
+:tem_posição rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf <http://purl.obolibrary.org/obo/RO_0000053> ;
+             rdfs:label "has position"@en ,
+                        "tem posição"@pt ;
+             <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a player to their functional position on the field, such as goalkeeper, centre back, fullback, midfielder, defensive midfielder, or forward."@en ,
+                                                              "Relação que associa um jogador à sua posição funcional em campo, como goleiro, zagueiro, lateral, meia, volante ou atacante."@pt .
+
+
+###  http://www.buildaz.io/ontocup/vencedor
+:vencedor rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf <http://purl.obolibrary.org/obo/IAO_0000136> ;
+          rdfs:label "vencedor"@pt ,
+                     "winner"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "Relation that associates a result to the team that scored more goals and therefore won the match."@en ,
+                                                           "Relação que associa um resultado ao time que marcou mais gols e, portanto, venceu a partida."@pt .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.buildaz.io/ontocup/ano
+:ano rdf:type owl:DatatypeProperty ;
+     rdfs:label "ano"@pt ,
+                "year"@en ;
+     <http://www.w3.org/2004/02/skos/core#definition> "Property that represents the edition year of the World Cup in which a national team participated, expressed as an integer numerical value."@en ,
+                                                      "Propriedade que representa o ano da edição da Copa do Mundo na qual uma seleção participou, expresso como um valor numérico inteiro."@pt .
+
+
+###  http://www.buildaz.io/ontocup/competicao
+:competicao rdf:type owl:DatatypeProperty ;
+            rdfs:label "competition"@en ,
+                       "competição"@pt ;
+            <http://www.w3.org/2004/02/skos/core#definition> "Property that represents the name of the competition associated with a season, expressed as a string value."@en ,
+                                                             "Propriedade que representa o nome da competição associada a uma temporada, expresso como uma cadeia de caracteres."@pt .
+
+
+###  http://www.buildaz.io/ontocup/cor
+:cor rdf:type owl:DatatypeProperty ;
+     rdfs:label "color"@en ,
+                "cor"@pt ;
+     <http://www.w3.org/2004/02/skos/core#definition> "Property that represents the color of the card applied to a player, which can take the values yellow or red."@en ,
+                                                      "Propriedade que representa a cor do cartão aplicado a um jogador, podendo assumir os valores amarelo ou vermelho."@pt .
+
+
+###  http://www.buildaz.io/ontocup/data
+:data rdf:type owl:DatatypeProperty ;
+      rdfs:label "data"@pt ,
+                 "date"@en ;
+      <http://www.w3.org/2004/02/skos/core#definition> "Property that represents the date and time at which a match took place, expressed as a temporal value."@en ,
+                                                       "Propriedade que representa a data e hora em que uma partida ocorreu, expressa como um valor temporal."@pt .
+
+
+###  http://www.buildaz.io/ontocup/gols_mandante
+:gols_mandante rdf:type owl:DatatypeProperty ;
+               rdfs:label "gols mandante"@pt ,
+                          "home goals"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> "Property that represents the number of goals scored by the home team during a match, expressed as an integer numerical value."@en ,
+                                                                "Propriedade que representa o número de gols marcados pelo time mandante durante uma partida, expresso como um valor numérico inteiro."@pt .
+
+
+###  http://www.buildaz.io/ontocup/gols_visitante
+:gols_visitante rdf:type owl:DatatypeProperty ;
+                rdfs:label "away goals"@en ,
+                           "gols visitante"@pt ;
+                <http://www.w3.org/2004/02/skos/core#definition> "Property that represents the number of goals scored by the away team during a match, expressed as an integer numerical value."@en ,
+                                                                 "Propriedade que representa o número de gols marcados pelo time visitante durante uma partida, expresso como um valor numérico inteiro."@pt .
+
+
+###  http://www.buildaz.io/ontocup/jogador_titular
+:jogador_titular rdf:type owl:DatatypeProperty ;
+                 rdfs:label "jogador titular"@pt ,
+                            "starting player"@en ;
+                 <http://www.w3.org/2004/02/skos/core#definition> "Property that references the player who was on the field before being replaced in a substitution process."@en ,
+                                                                  "Propriedade que referencia o jogador que estava em campo antes de ser substituído em um processo de substituição."@pt .
+
+
+###  http://www.buildaz.io/ontocup/marcado_em
+:marcado_em rdf:type owl:DatatypeProperty ;
+            rdfs:label "marcado em"@pt ,
+                       "recorded at"@en ;
+            <http://www.w3.org/2004/02/skos/core#definition> "Property that represents the point in time at which a goal or card was recorded during a match, expressed as a temporal value."@en ,
+                                                             "Propriedade que representa o instante de tempo em que um gol ou cartão foi registrado durante uma partida, expresso como um valor temporal."@pt .
+
+
+###  http://www.buildaz.io/ontocup/motivo
+:motivo rdf:type owl:DatatypeProperty ;
+        rdfs:label "motivo"@pt ,
+                   "reason"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> "Property that describes the infraction or behavior that motivated the application of a card to a player by the referee."@en ,
+                                                         "Propriedade que descreve a infração ou comportamento que motivou a aplicação de um cartão a um jogador pelo árbitro."@pt .
+
+
+###  http://www.buildaz.io/ontocup/status
+:status rdf:type owl:DatatypeProperty ;
+        rdfs:label "status"@en ,
+                   "status"@pt ;
+        <http://www.w3.org/2004/02/skos/core#definition> "Property that represents the validation status of a goal, indicating whether it has been confirmed, disallowed, or is under review."@en ,
+                                                         "Propriedade que representa a situação de validação de um gol, indicando se foi confirmado, anulado ou está sob revisão."@pt .
+
+
+###  http://www.buildaz.io/ontocup/substituto
+:substituto rdf:type owl:DatatypeProperty ;
+            rdfs:label "substitute"@en ,
+                       "substituto"@pt ;
+            <http://www.w3.org/2004/02/skos/core#definition> "Property that references the substitute player who enters the field to replace the starting player during a match."@en ,
+                                                             "Propriedade que referencia o jogador reserva que entra em campo para substituir o jogador titular durante uma partida."@pt .
+
+
+###  http://www.buildaz.io/ontocup/tem_capacidade
+:tem_capacidade rdf:type owl:DatatypeProperty ;
+                rdfs:label "has capacity"@en ,
+                           "tem capacidade"@pt ;
+                <http://www.w3.org/2004/02/skos/core#definition> "Property that represents the maximum spectator capacity of a stadium, expressed as an integer numerical value."@en ,
+                                                                 "Propriedade que representa a capacidade máxima de público de um estádio, expressa como um valor numérico inteiro."@pt .
+
+
+###  http://www.buildaz.io/ontocup/tem_idade
+:tem_idade rdf:type owl:DatatypeProperty ;
+           rdfs:subPropertyOf owl:topDataProperty ;
+           rdfs:label "has age"@en ,
+                      "tem idade"@pt ;
+           <http://www.w3.org/2004/02/skos/core#definition> "Property that represents the age of a person in years, expressed as an integer numerical value."@en ,
+                                                            "Propriedade que representa a idade de uma pessoa em anos, expressa como um valor numérico inteiro."@pt .
+
+
+###  http://www.buildaz.io/ontocup/tem_nome
+:tem_nome rdf:type owl:DatatypeProperty ;
+          rdfs:label "has name"@en ,
+                     "tem nome"@pt ;
+          <http://www.w3.org/2004/02/skos/core#definition> "Property that represents the name of an entity, expressed as a string value."@en ,
+                                                           "Propriedade que representa o nome de uma entidade, expresso como uma cadeia de caracteres."@pt .
+
+
+###  http://www.buildaz.io/ontocup/teve_resultado
+:teve_resultado rdf:type owl:DatatypeProperty ;
+                rdfs:label "had result"@en ,
+                           "teve resultado"@pt ;
+                <http://www.w3.org/2004/02/skos/core#definition> "Property that associates a match with its final result, recording the outcome of the contest between the two teams."@en ,
+                                                                 "Propriedade que associa uma partida ao seu resultado final, registrando o desfecho da disputa entre os dois times."@pt .
+
+
+###  http://www.buildaz.io/ontocup/tipo
+:tipo rdf:type owl:DatatypeProperty ;
+      rdfs:label "tipo"@pt ,
+                 "type"@en ;
+      <http://www.w3.org/2004/02/skos/core#definition> "Property que classifies the manner in which a goal was scored, which can take values such as normal goal, own goal, or penalty."@en ,
+                                                       "Propriedade que classifica a forma como um gol foi marcado, podendo assumir valores como gol normal, gol contra ou pênalti."@pt .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.buildaz.io/ontocup/arbitro
+:arbitro rdf:type owl:Class ;
+         rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000023> ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000197> ;
+                           owl:someValuesFrom :pessoa
+                         ] ;
+         rdfs:label "referee"@en ,
+                    "árbitro"@pt ;
+         <http://www.w3.org/2004/02/skos/core#definition> "Papel assumido por uma pessoa quando é designada para fiscalizar e garantir o cumprimento das regras do jogo durante uma partida."@pt ,
+                                                          "Role assumed by a person when designated to oversee and ensure compliance with the rules of the game during a match."@en .
+
+
+###  http://www.buildaz.io/ontocup/atacante
+:atacante rdf:type owl:Class ;
+          rdfs:subClassOf :jogador ;
+          rdfs:label "Atacante"@pt ,
+                     "forward"@en ;
+          <http://www.w3.org/2004/02/skos/core#definition> "Papel assumido por um jogador cuja função principal é criar e converter oportunidades de gol para o time."@pt ,
+                                                           "Role assumed by a player whose main function is to create and convert goal-scoring opportunities for the team."@en .
+
+
+###  http://www.buildaz.io/ontocup/cartão
+:cartão rdf:type owl:Class ;
+        rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000027> ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000136> ;
+                          owl:someValuesFrom :marcar_cartão
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :marcado_por ;
+                          owl:someValuesFrom :arbitro
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :recebido_por ;
+                          owl:someValuesFrom :jogador
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :cor ;
+                          owl:someValuesFrom xsd:string
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :marcado_em ;
+                          owl:someValuesFrom xsd:string
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :motivo ;
+                          owl:someValuesFrom xsd:string
+                        ] ;
+        rdfs:label "card"@en ,
+                   "cartão"@pt ;
+        <http://www.w3.org/2004/02/skos/core#definition> "An information content entity that records the application of a disciplinary penalty to a player during a match, being about the card-marking process and about the player who received it."@en ,
+                                                         "Entidade informacional que registra a aplicação de uma penalidade disciplinar a um jogador durante uma partida, sendo sobre o processo de marcar cartão e sobre o jogador que o recebeu."@pt .
+
+
+###  http://www.buildaz.io/ontocup/cidade
+:cidade rdf:type owl:Class ;
+        rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000027> ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000171> ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :estado
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tem_nome ;
+                          owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:string
+                        ] ;
+        <http://purl.obolibrary.org/obo/IAO_0000118> "town"@en ;
+        rdfs:label "cidade"@pt ,
+                   "city"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> "Agregado de objetos que representa uma unidade territorial urbana, localizada em um estado, e que serve de localização para um ou mais estádios onde as partidas da copa do mundo são realizadas."@pt ,
+                                                         "An aggregate of objects representing an urban territorial unit, located within a state, and serving as the location for one or more stadiums where World Cup matches are held."@en .
+
+
+###  http://www.buildaz.io/ontocup/cidade_sede
+:cidade_sede rdf:type owl:Class ;
+             rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000023> ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000197> ;
+                               owl:someValuesFrom :cidade
+                             ] ;
+             rdfs:label "cidade sede"@pt ,
+                        "host city"@en ,
+                        "host town"@en ;
+             <http://www.w3.org/2004/02/skos/core#definition> "Papel assumido por uma cidade quando hospeda partidas oficiais da Copa do Mundo, servindo de localização para um ou mais estádios utilizados na competição."@pt ,
+                                                              "Role assumed by a city when it hosts official World Cup matches, serving as the location for one or more stadiums used in the competition."@en .
+
+
+###  http://www.buildaz.io/ontocup/clube
+:clube rdf:type owl:Class ;
+       rdfs:subClassOf :organização ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                         owl:someValuesFrom :time
+                       ] ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :tem_nome ;
+                         owl:someValuesFrom xsd:string
+                       ] ;
+       rdfs:label "club"@en ,
+                  "clube"@pt ;
+       <http://www.w3.org/2004/02/skos/core#definition> "A football club is an organizational entity—a legal structure with headquarters, staff, and resources. It represents the institutional identity of a team, managing its brand, facilities, and operations. It serves as the formal entity that affiliates with federations and confederations to participate in official competitions."@en ,
+                                                        """É um tipo de organização. Estrutura jurídica que possui sede, funcionários,  etc ... É a instituição ou coletivo que detém a identidade de um time, responsável por gerir os recursos, a marca e o espaço
+onde os jogadores desempenham seu papel. É a unidade que estabelece o vínculo formal com as federações e confederações para competir em torneios oficiais."""@pt .
+
+
+###  http://www.buildaz.io/ontocup/continente
+:continente rdf:type owl:Class ;
+            rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000027> ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :tem_nome ;
+                              owl:someValuesFrom xsd:string
+                            ] ;
+            rdfs:label "continent"@en ,
+                       "continente"@pt ;
+            <http://www.w3.org/2004/02/skos/core#definition> "Agregado de objetos que representa uma grande divisão territorial da superfície terrestre, composta por países, e que serve de localização para as nações participantes da copa do mundo."@pt ,
+                                                             "An aggregate of objects representing a major territorial division of the Earth's surface, composed of countries, and serving as the location for the nations participating in the World Cup."@en .
+
+
+###  http://www.buildaz.io/ontocup/estado
+:estado rdf:type owl:Class ;
+        rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000027> ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000171> ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onClass :país
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tem_nome ;
+                          owl:someValuesFrom xsd:string
+                        ] ;
+        <http://purl.obolibrary.org/obo/IAO_0000118> "federative unit"@en ;
+        rdfs:label "estado"@pt ,
+                   "state"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> "Agregado de objetos que representa uma divisão territorial de um país, no qual cidades estão localizadas, constituindo uma unidade administrativa intermediária entre a cidade e o país."@pt ,
+                                                         "An aggregate of objects representing a territorial division of a country, in which cities are located, constituting an administrative unit intermediate between the city and the country."@en .
+
+
+###  http://www.buildaz.io/ontocup/estádio
+:estádio rdf:type owl:Class ;
+         rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000027> ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000171> ;
+                           owl:someValuesFrom :cidade
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :tem_capacidade ;
+                           owl:someValuesFrom xsd:string
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :tem_nome ;
+                           owl:someValuesFrom xsd:string
+                         ] ;
+         rdfs:label "estádio"@pt ,
+                    "stadium"@en ;
+         <http://www.w3.org/2004/02/skos/core#definition> "Agregado de objetos que representa uma estrutura física destinada à realização de partidas de futebol, localizada em uma cidade, e que serve de local para os processos de partida da copa do mundo."@pt ,
+                                                          "An aggregate of objects representing a physical structure intended for the holding of football matches, located in a city, and serving as the location for the match processes of the World Cup."@en .
+
+
+###  http://www.buildaz.io/ontocup/fazer_substituição
+:fazer_substituição rdf:type owl:Class ;
+                    rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000057> ;
+                                      owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                      owl:onClass :jogador
+                                    ] ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty :tipo ;
+                                      owl:someValuesFrom xsd:string
+                                    ] ;
+                    rdfs:label "Make Substitution"@en ,
+                               "fazer substituição"@pt ;
+                    <http://www.w3.org/2004/02/skos/core#definition> "A sporting process in which a player on the field is removed from the match and replaced by a substitute player, within the limits permitted by the competition rules."@en ,
+                                                                     "Processo esportivo no qual um jogador em campo é retirado da partida e substituído por outro jogador reserva, dentro dos limites permitidos pelas regras da competição."@pt .
+
+
+###  http://www.buildaz.io/ontocup/gol
+:gol rdf:type owl:Class ;
+     rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000027> ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000136> ;
+                       owl:someValuesFrom :marcar_gol
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :assistido_por ;
+                       owl:someValuesFrom :jogador
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :marcado_por ;
+                       owl:someValuesFrom :jogador
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :marcado_em ;
+                       owl:someValuesFrom xsd:string
+                     ] ,
+                     [ rdf:type owl:Restriction ;
+                       owl:onProperty :tipo ;
+                       owl:someValuesFrom xsd:string
+                     ] ;
+     rdfs:label "goal"@en ,
+                "gol"@pt ;
+     <http://www.w3.org/2004/02/skos/core#definition> "An information content entity that records the occurrence of a goal in a match, being about the process of scoring and about the player who scored it"@en ,
+                                                      "Entidade informacional que registra a ocorrência de um gol em uma partida, sendo sobre o processo de marcar gol e sobre o jogador que o marcou."@pt .
+
+
+###  http://www.buildaz.io/ontocup/goleiro
+:goleiro rdf:type owl:Class ;
+         rdfs:subClassOf :jogador ;
+         rdfs:label "goalkeeper"@en ,
+                    "goleiro"@pt ;
+         <http://www.w3.org/2004/02/skos/core#definition> "Papel assumido por um jogador cuja função principal é defender a baliza do time, sendo o único autorizado a usar as mãos dentro da área."@pt ,
+                                                          "Role assumed by a player whose main function is to defend the team's goal, being the only one authorized to use their hands inside the penalty area."@en .
+
+
+###  http://www.buildaz.io/ontocup/jogador
+:jogador rdf:type owl:Class ;
+         rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000023> ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000197> ;
+                           owl:someValuesFrom :pessoa
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000197> ;
+                           owl:allValuesFrom [ owl:intersectionOf ( :pessoa
+                                                                    [ rdf:type owl:Restriction ;
+                                                                      owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000129> ;
+                                                                      owl:someValuesFrom :time
+                                                                    ]
+                                                                  ) ;
+                                               rdf:type owl:Class
+                                             ]
+                         ] ;
+         owl:disjointWith :técnico ;
+         rdfs:label "jogador"@pt ,
+                    "player"@en ;
+         <http://www.w3.org/2004/02/skos/core#definition> "Papel assumido por uma pessoa quando é convocada ou contratada para fazer parte de um time e participar de partidas."@pt ,
+                                                          "Role assumed by a person when called up or contracted to be part of a team and participate in matches."@en .
+
+
+###  http://www.buildaz.io/ontocup/marcar_cartão
+:marcar_cartão rdf:type owl:Class ;
+               rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000050> ;
+                                 owl:someValuesFrom :partida
+                               ] ;
+               rdfs:label "Issue Card"@en ,
+                          "marcar cartão"@pt ;
+               <http://www.w3.org/2004/02/skos/core#definition> "A sporting process in which the referee applies a disciplinary penalty to a player during a match, displaying a yellow or red card as a consequence of an infraction committed."@en ,
+                                                                "Processo esportivo no qual o árbitro aplica uma penalidade disciplinar a um jogador durante uma partida, exibindo um cartão amarelo ou vermelho como consequência de uma infração cometida."@pt .
+
+
+###  http://www.buildaz.io/ontocup/marcar_gol
+:marcar_gol rdf:type owl:Class ;
+            rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :registrado_em ;
+                              owl:someValuesFrom :partida
+                            ] ;
+            rdfs:label "Score a goal"@en ,
+                       "marcar gol"@pt ;
+            <http://www.w3.org/2004/02/skos/core#definition> "A sporting process in which a player drives the ball into the opposing goal during a match, constituting a part of the match process."@en ,
+                                                             "Processo esportivo no qual um jogador introduz a bola na baliza adversária durante uma partida, constituindo parte do processo de partida."@pt .
+
+
+###  http://www.buildaz.io/ontocup/meia
+:meia rdf:type owl:Class ;
+      rdfs:subClassOf :jogador ;
+      rdfs:label "meia"@pt ,
+                 "midfielder"@en ;
+      <http://www.w3.org/2004/02/skos/core#definition> "Papel assumido por um jogador responsável pela ligação entre a defesa e o ataque, organizando e distribuindo o jogo."@pt ,
+                                                       "Role assumed by a player responsible for linking defense and attack, organizing and distributing the game."@en .
+
+
+###  http://www.buildaz.io/ontocup/nacionalidade
+:nacionalidade rdf:type owl:Class ;
+               rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000019> ;
+               rdfs:label "nacionalidade"@pt ,
+                          "nationality"@en ;
+               <http://www.w3.org/2004/02/skos/core#definition> "Qualidade que representa o vínculo jurídico e cultural de uma pessoa com um determinado país, determinando sua elegibilidade para representar uma seleção nacional."@pt ,
+                                                                "Quality representing the legal and cultural bond of a person to a particular country, determining their eligibility to represent a national team."@en .
+
+
+###  http://www.buildaz.io/ontocup/organização
+:organização rdf:type owl:Class ;
+             rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000027> ;
+             rdfs:label "organization"@en ,
+                        "organização"@pt ;
+             <http://www.w3.org/2004/02/skos/core#definition> "Agregado de objetos que representa uma entidade institucional formada por pessoas e recursos, servindo como classe geral para entidades organizacionais do domínio do futebol, tais como clubes, federações e confederações."@pt ,
+                                                              "An aggregate of objects representing an institutional entity composed of people and resources, serving as a general class for organizational entities in the football domain, such as clubs, federations and confederations"@en .
+
+
+###  http://www.buildaz.io/ontocup/partida
+:partida rdf:type owl:Class ;
+         rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000015> ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                           owl:someValuesFrom :fazer_substituição
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                           owl:someValuesFrom :marcar_cartão
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000051> ;
+                           owl:someValuesFrom :marcar_gol
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :acontece_em ;
+                           owl:someValuesFrom :estádio
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000057> ;
+                           owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                           owl:onClass :time
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :data ;
+                           owl:someValuesFrom xsd:dateTime
+                         ] ;
+         rdfs:label "match"@en ,
+                    "partida"@pt ;
+         <http://www.w3.org/2004/02/skos/core#definition> "A sporting process in which exactly two teams compete against each other in a stadium, during a determined time interval, generating as output a result that records the score of the contest."@en ,
+                                                          "Processo esportivo no qual exatamente dois times se enfrentam em um estádio, durante um intervalo de tempo determinado, gerando como saída um resultado que registra o placar da disputa."@pt .
+
+
+###  http://www.buildaz.io/ontocup/país
+:país rdf:type owl:Class ;
+      rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000027> ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000171> ;
+                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                        owl:onClass :continente
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :tem_nome ;
+                        owl:someValuesFrom xsd:string
+                      ] ;
+      rdfs:label "country"@en ,
+                 "país"@pt ;
+      <http://www.w3.org/2004/02/skos/core#definition> "It is an aggregate entity composed of persons, institutions, and territories, internationally recognized as a sovereign nation, capable of bearing institutional roles such as event host."@en ,
+                                                       "É um agregado de objetos composto por pessoas, instituições e territórios, reconhecido internacionalmente como uma nação soberana, capaz de assumir papéis institucionais como o de sede de eventos."@pt-br .
+
+
+###  http://www.buildaz.io/ontocup/país_sede
+:país_sede rdf:type owl:Class ;
+           rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000023> ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000197> ;
+                             owl:someValuesFrom :país
+                           ] ;
+           rdfs:label "host country"@en ,
+                      "país sede"@pt ;
+           <http://www.w3.org/2004/02/skos/core#definition> "Papel assumido por um país quando é designado pela FIFA para sediar a Copa do Mundo, sendo responsável pela organização e infraestrutura geral da competição."@pt ,
+                                                            "Role assumed by a country when designated by FIFA to host the World Cup, being responsible for the overall organization and infrastructure of the competition."@en .
+
+
+###  http://www.buildaz.io/ontocup/pessoa
+:pessoa rdf:type owl:Class ;
+        rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000030> ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tem_nacionalidade ;
+                          owl:someValuesFrom :nacionalidade
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tem_idade ;
+                          owl:someValuesFrom xsd:string
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :tem_nome ;
+                          owl:someValuesFrom xsd:string
+                        ] ;
+        rdfs:label "person"@en ,
+                   "pessoa"@pt ;
+        <http://www.w3.org/2004/02/skos/core#definition> "Persons are entities that endure through time, preserving their identity even as their qualities change."@en ,
+                                                         "Pessoas são \"entidades\" ou \"partes do mundo\" que persistem no tempo, mantendo sua identidade mesmo com mudanças em suas qualidades."@pt-br .
+
+
+###  http://www.buildaz.io/ontocup/placar
+:placar rdf:type owl:Class ;
+        rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000027> ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000050> ;
+                          owl:someValuesFrom :resultado
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000136> ;
+                          owl:someValuesFrom :partida
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :registrado_em ;
+                          owl:someValuesFrom :partida
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :participante ;
+                          owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                          owl:onClass :seleção_-_time
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :gols_mandante ;
+                          owl:someValuesFrom xsd:int
+                        ] ,
+                        [ rdf:type owl:Restriction ;
+                          owl:onProperty :gols_visitante ;
+                          owl:someValuesFrom xsd:int
+                        ] ;
+        rdfs:label "placar"@pt ,
+                   "score"@en ;
+        <http://www.w3.org/2004/02/skos/core#definition> "An information content entity that represents the numerical count of goals scored by each team during a match, being part of the result and quantitatively expressing the performance of each team."@en ,
+                                                         "Entidade informacional que representa a contagem numérica de gols marcados por cada time durante uma partida, sendo parte do resultado e expressando quantitativamente o desempenho de cada equipe."@pt .
+
+
+###  http://www.buildaz.io/ontocup/resultado
+:resultado rdf:type owl:Class ;
+           rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000027> ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :perdedor ;
+                             owl:someValuesFrom :seleção_-_time
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :registrado_em ;
+                             owl:someValuesFrom :partida
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :vencedor ;
+                             owl:someValuesFrom :seleção_-_time
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :empatante ;
+                             owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                             owl:onClass :seleção_-_time
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :teve_resultado ;
+                             owl:maxQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                             owl:onDataRange xsd:string
+                           ] ;
+           rdfs:label "result"@en ,
+                      "resultado"@pt ;
+           <http://www.w3.org/2004/02/skos/core#definition> "An information content entity that records the outcome of a match, being about the match process and synthesizing the data related to the goals scored by each team"@en ,
+                                                            "Entidade informacional que registra o desfecho de uma partida, sendo sobre o processo de partida e sintetizando os dados relativos aos gols marcados por cada time."@pt .
+
+
+###  http://www.buildaz.io/ontocup/seleção_-_time
+:seleção_-_time rdf:type owl:Class ;
+                rdfs:subClassOf :time ,
+                                [ rdf:type owl:Restriction ;
+                                  owl:onProperty :has_member_part ;
+                                  owl:allValuesFrom [ owl:intersectionOf ( :pessoa
+                                                                           [ rdf:type owl:Restriction ;
+                                                                             owl:onProperty :tem_nacionalidade ;
+                                                                             owl:someValuesFrom :nacionalidade
+                                                                           ]
+                                                                         ) ;
+                                                      rdf:type owl:Class
+                                                    ]
+                                ] ;
+                rdfs:label "national team"@en ,
+                           "seleção-time"@pt ;
+                <http://www.w3.org/2004/02/skos/core#definition> "Agregado de objetos cujas partes membro são exclusivamente pessoas de mesma nacionalidade desempenhando o papel de jogador, constituindo o coletivo esportivo que representa um país em campo durante as partidas da Copa do Mundo."@pt ,
+                                                                 "Object aggregate whose member parts are exclusively persons of shared nationality in the role of players, constituting the sporting collective that represents a country on the field during World Cup matches."@en .
+
+
+###  http://www.buildaz.io/ontocup/seleção_nacional
+:seleção_nacional rdf:type owl:Class ;
+                  rdfs:subClassOf :clube ;
+                  rdfs:label "selection"@en ,
+                             "seleção nacional"@pt ;
+                  <http://www.w3.org/2004/02/skos/core#definition> "Complexo organizacional que representa a entidade institucional responsável por constituir e administrar a representação futebolística oficial de um país em competições internacionais, detendo vínculos formais com confederações e federações."@pt ,
+                                                                   "Organizational complex representing the institutional entity responsible for constituting and managing a country's official football representation in international competitions, holding formal ties with confederations and federations."@en .
+
+
+###  http://www.buildaz.io/ontocup/substituição
+:substituição rdf:type owl:Class ;
+              rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000027> ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty <http://purl.obolibrary.org/obo/IAO_0000136> ;
+                                owl:someValuesFrom :fazer_substituição
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :jogador_titular ;
+                                owl:someValuesFrom xsd:string
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :marcado_em ;
+                                owl:someValuesFrom xsd:string
+                              ] ,
+                              [ rdf:type owl:Restriction ;
+                                owl:onProperty :substituto ;
+                                owl:someValuesFrom xsd:Name
+                              ] ;
+              rdfs:label "substituição"@pt ,
+                         "substitution"@en ;
+              <http://www.w3.org/2004/02/skos/core#definition> "An information content entity that records the exchange of a player on the field for another during a match, being about the substitution process and about the players involved in the exchange."@en ,
+                                                               "Entidade informacional que registra a troca de um jogador em campo por outro durante uma partida, sendo sobre o processo de substituição e sobre os jogadores envolvidos na troca."@pt .
+
+
+###  http://www.buildaz.io/ontocup/temporada
+:temporada rdf:type owl:Class ;
+           rdfs:subClassOf <http://purl.obolibrary.org/obo/IAO_0000027> ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :sediado ;
+                             owl:someValuesFrom :país
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :ano ;
+                             owl:someValuesFrom xsd:int
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty :competicao ;
+                             owl:someValuesFrom xsd:string
+                           ] ;
+           rdfs:label "season"@en ,
+                      "temporada"@pt ;
+           <http://www.w3.org/2004/02/skos/core#definition> "An information content entity that represents a specific edition of the World Cup competition, characterized by a year and hosted in a country."@en ,
+                                                            "Entidade informacional que representa uma edição específica da competição Copa do Mundo, caracterizada por um ano e sediada em um país."@pt .
+
+
+###  http://www.buildaz.io/ontocup/time
+:time rdf:type owl:Class ;
+      rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000027> ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :has_member_part ;
+                        owl:someValuesFrom :pessoa
+                      ] ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :tem_nome ;
+                        owl:someValuesFrom xsd:string
+                      ] ;
+      rdfs:label "team"@en ,
+                 "time"@pt ;
+      <http://www.w3.org/2004/02/skos/core#definition> "A collection of people in the role of players, regardless of their location, all connected to a common organizational entity."@en ,
+                                                       "É um agregado de objetos cujas partes membro são pessoas no papel de jogador, sem restrição de localidade, vinculadas a uma entidade organizacional comum."@pt-br .
+
+
+###  http://www.buildaz.io/ontocup/técnico
+:técnico rdf:type owl:Class ;
+         rdfs:subClassOf <http://purl.obolibrary.org/obo/BFO_0000023> ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty <http://purl.obolibrary.org/obo/BFO_0000197> ;
+                           owl:someValuesFrom :pessoa
+                         ] ,
+                         [ rdf:type owl:Restriction ;
+                           owl:onProperty :dirige ;
+                           owl:someValuesFrom :time
+                         ] ;
+         rdfs:label "coach"@en ,
+                    "técnico"@pt ;
+         <http://www.w3.org/2004/02/skos/core#definition> "Papel assumido por uma pessoa quando é responsável pela direção técnica e tática de um time durante a competição."@pt ,
+                                                          "Role assumed by a person when responsible for the technical and tactical management of a team during the competition."@en .
+
+
+###  http://www.buildaz.io/ontocup/zagueiro
+:zagueiro rdf:type owl:Class ;
+          rdfs:subClassOf :jogador ;
+          rdfs:label "centre back"@en ,
+                     "zagueiro"@pt ;
+          <http://www.w3.org/2004/02/skos/core#definition> "Papel assumido por um jogador cuja função principal é proteger a área defensiva do time, impedindo o avanço dos adversários."@pt ,
+                                                           "Role assumed by a player whose main function is to protect the team's defensive area, preventing the advance of opponents."@en .
+
+
+#################################################################
+#    Rules
+#################################################################
+
+:s rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:n rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+:p rdf:type <http://www.w3.org/2003/11/swrl#Variable> .
+
+[ <http://swrl.stanford.edu/ontologies/3.3/swrla.owl#isRuleEnabled> "true"^^xsd:boolean ;
+   rdfs:comment "Regra para validação de seleção, em que seleção deve ser composto por jogadores de mesma nacionalidade." ;
+   rdfs:label "S5" ;
+   rdf:type <http://www.w3.org/2003/11/swrl#Imp> ;
+   <http://www.w3.org/2003/11/swrl#body> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tem_nacionalidade ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :s ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :n
+                                                     ] ;
+                                           rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                      rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                                  <http://www.w3.org/2003/11/swrl#propertyPredicate> :has_member_part ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument1> :s ;
+                                                                  <http://www.w3.org/2003/11/swrl#argument2> :p
+                                                                ] ;
+                                                      rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                 rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                             <http://www.w3.org/2003/11/swrl#classPredicate> :seleção_-_time ;
+                                                                             <http://www.w3.org/2003/11/swrl#argument1> :s
+                                                                           ] ;
+                                                                 rdf:rest [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                                                            rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#ClassAtom> ;
+                                                                                        <http://www.w3.org/2003/11/swrl#classPredicate> :pessoa ;
+                                                                                        <http://www.w3.org/2003/11/swrl#argument1> :p
+                                                                                      ] ;
+                                                                            rdf:rest rdf:nil
+                                                                          ]
+                                                               ]
+                                                    ]
+                                         ] ;
+   <http://www.w3.org/2003/11/swrl#head> [ rdf:type <http://www.w3.org/2003/11/swrl#AtomList> ;
+                                           rdf:first [ rdf:type <http://www.w3.org/2003/11/swrl#IndividualPropertyAtom> ;
+                                                       <http://www.w3.org/2003/11/swrl#propertyPredicate> :tem_nacionalidade ;
+                                                       <http://www.w3.org/2003/11/swrl#argument1> :p ;
+                                                       <http://www.w3.org/2003/11/swrl#argument2> :n
+                                                     ] ;
+                                           rdf:rest rdf:nil
+                                         ]
+ ] .
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
